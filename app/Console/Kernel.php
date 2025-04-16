@@ -13,9 +13,19 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        \Illuminate\Database\Console\Factories\FactoryMakeCommand::class,
-        \Illuminate\Database\Console\Seeds\SeederMakeCommand::class,
-        \Illuminate\Database\Console\Migrations\MigrateMakeCommand::class,
+    // Factory/Seeder commands
+    \Illuminate\Database\Console\Factories\FactoryMakeCommand::class,
+    \Illuminate\Database\Console\Seeds\SeederMakeCommand::class,
+    
+    // Migration commands
+    \Illuminate\Database\Console\Migrations\MigrateMakeCommand::class,
+    \Illuminate\Database\Console\Migrations\MigrateCommand::class,
+    \Illuminate\Database\Console\Migrations\FreshCommand::class,
+    \Illuminate\Database\Console\Migrations\InstallCommand::class,
+    \Illuminate\Database\Console\Migrations\RefreshCommand::class,
+    \Illuminate\Database\Console\Migrations\ResetCommand::class,
+    \Illuminate\Database\Console\Migrations\RollbackCommand::class,
+    \Illuminate\Database\Console\Migrations\StatusCommand::class,
     ];
 
     /**
