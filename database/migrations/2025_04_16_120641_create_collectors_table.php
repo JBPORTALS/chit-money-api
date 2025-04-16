@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Query\Expression;
 
 return new class extends Migration
 {
@@ -12,13 +13,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('collectors', function (Blueprint $table) {
-            $table->uuid('id')->defaultRandom();
-            $table->string('name');
-            $table->date('dob');
-            $table->text('aadhar_front_photo_key');
-            $table->text('aadhar_back_photo_key');
-            $table->foreignUuid('bank_details_id');
-            $table->foreignUuid('contact_id');
+            $table->uuid('id')->default(new Expression('(uuid())'));
+            $table->string('name')->nullable();
+            $table->date('dob')->nullable();
+            $table->text('aadhar_front_photo_key')->nullable();
+            $table->text('aadhar_back_photo_key')->nullable();
+            $table->foreignUuid('bank_details_id')->nullable();
+            $table->foreignUuid('contact_id')->nullable();
             $table->timestamps();
 
             $table->primary('id');

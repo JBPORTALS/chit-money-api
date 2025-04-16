@@ -12,15 +12,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contacts', function (Blueprint $table) {
+        Schema::create('organizations', function (Blueprint $table) {
             $table->uuid('id')->default(new Expression('(uuid())'));
+            $table->foreignUuid('collector_id');
+            $table->string('name');
             $table->text('address');
             $table->string('city');
             $table->string('state');
-            $table->integer('pincode');
+            $table->string('pincode');
+            $table->string('registration_certificate_url');
             $table->timestamps();
 
             $table->primary('id');
+
+            //Relations
+            $table->foreign('collector_id')->references('id')->on('collectors');
         });
     }
 
@@ -29,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('contacts');
+        Schema::dropIfExists('organizations');
     }
 };
