@@ -2,16 +2,16 @@
 
 namespace Database\Seeders;
 
+use App\Models\BankDetail;
 use Illuminate\Database\Seeder;
-use App\Models\Contact;
 
-class ContactSeeder extends Seeder
+class BankDetailSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Contact::factory()->count(5)->create();
+        BankDetail::factory()->count(5)->create();
     }
 }

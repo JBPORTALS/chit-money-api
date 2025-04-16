@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('bank_details', function (Blueprint $table) {
             $table->uuid('id')->default(new Expression('(uuid())'));
             $table->string('account_holder_name');
+            $table->text('account_number');
             $table->string('ifsc_code');
             $table->string('branch_name');
             $table->string('account_type');

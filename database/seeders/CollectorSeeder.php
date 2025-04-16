@@ -2,18 +2,17 @@
 
 namespace Database\Seeders;
 
+use App\Models\Collector;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class CollectorSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
-        $this->call(CollectorSeeder::class);
+        Collector::factory()->count(5)->create();
     }
 }
