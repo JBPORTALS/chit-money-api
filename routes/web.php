@@ -15,7 +15,7 @@
 */
 
 $router->group(['prefix'=>'api'],function () use ($router){
-    //$router->get('users','UserController@getAll'); # /api/users
+    $router->get('contacts','ContactController@list'); # /api/contacts
     $router->get('check',function (){
       return response()->json(['message'=>'ok']);
     });
