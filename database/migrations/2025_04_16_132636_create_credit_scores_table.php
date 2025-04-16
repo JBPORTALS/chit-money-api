@@ -20,6 +20,10 @@ return new class extends Migration
             $table->timestamps();
 
             $table->primary('id');
+
+            //Relations
+            $table->foreign('payment_id')->references('id')->on('payments');
+            $table->foreign('subscriber_id')->references('id')->on('subscribers');
         });
     }
 
