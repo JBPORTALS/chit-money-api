@@ -11,7 +11,6 @@ class ContactFactory extends Factory
 
     public function definition(): array
     {
-        $this->faker->locale = 'en_IN';
         
     	return [
             'address' => $this->faker->address(),
