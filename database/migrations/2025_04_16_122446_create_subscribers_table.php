@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('subscribers', function (Blueprint $table) {
             $table->uuid('id')->defaultRandom();
+            $table->string('display_userId');
             $table->string('name');
             $table->date('dob');
             $table->text('aadhar_front_photo_key');
