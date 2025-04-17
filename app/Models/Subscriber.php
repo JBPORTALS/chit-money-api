@@ -5,19 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Subscriber extends Model
 {
     use HasUuids, HasFactory;
     protected $keyType = 'string';
 
-    public function contactDetails()
+    public function contactDetails(): HasOne
     {
-        return $this->belongsTo(Contact::class, 'contact_id');
+        return $this->hasOne(Contact::class);
     }
 
-    public function bankDetails()
+    public function bankDetails(): HasOne
     {
-        return $this->belongsTo(BankDetail::class, 'bank_details_id');
+        return $this->hasOne(BankDetail::class);
     }
 }

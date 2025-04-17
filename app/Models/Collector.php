@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Collector extends Model
 {
@@ -18,13 +18,13 @@ class Collector extends Model
         return $this->hasMany(Organization::class);
     }
 
-    public function contact(): BelongsTo
+    public function contact(): HasOne
     {
-        return $this->belongsTo(Contact::class);
+        return $this->hasOne(Contact::class);
     }
 
-    public function bankDetails(): BelongsTo
+    public function bankDetails(): HasOne
     {
-        return $this->belongsTo(BankDetail::class);
+        return $this->hasOne(BankDetail::class);
     }
 }
