@@ -12,13 +12,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('batch_subscribers', function (Blueprint $table) {
+        Schema::create('batch_subscriber', function (Blueprint $table) {
             $table->uuid('id')->default(new Expression('(uuid())'));
             $table->foreignUuid('batch_id');
             $table->foreignUuid('subscriber_id');
             $table->string('chit_id');
             $table->boolean('is_freezed')->default(FALSE);
-            $table->dateTimeTz('freezed_at',precision:0)->nullable();
+            $table->dateTimeTz('freezed_at', precision: 0)->nullable();
             $table->timestamps();
 
             $table->primary('id');

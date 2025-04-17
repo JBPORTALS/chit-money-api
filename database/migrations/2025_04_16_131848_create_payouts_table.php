@@ -34,7 +34,7 @@ return new class extends Migration
             $table->primary('id');
 
             //Relations
-            $table->foreign('batch_subscriber_id')->references('id')->on('batch_subscribers');
+            $table->foreign('batch_subscriber_id')->references('id')->on('batch_subscriber');
         });
     }
 
