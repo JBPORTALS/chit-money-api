@@ -14,9 +14,12 @@
 |
 */
 
-$router->group(['prefix'=>'api'],function () use ($router){
-    $router->get('contacts','ContactController@list'); # /api/contacts
-    $router->get('check',function (){
-      return response()->json(['message'=>'ok']);
-    });
+$router->group(['prefix' => 'api'], function () use ($router) {
+
+  //Collector Group
+  $router->group(['prefix' => 'collectors'], function () use ($router) {
+    $router->get('/{id}', 'CollectorController@getById');
+    $router->put('/{id}', 'CollectorController@update');
+    $router->get('/{id}/organizations', 'CollectorController@getOrganizations');
+  });
 });

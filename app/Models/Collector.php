@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
@@ -13,14 +14,21 @@ class Collector extends Model
     use HasUuids, HasFactory;
     protected $keyType = 'string';
 
+    protected $fillable = [
+        'name',
+        'dob',
+        'aadhar_back_photo_key',
+        'aadhar_front_photo_key'
+    ];
+
     public function organizations(): HasMany
     {
         return $this->hasMany(Organization::class);
     }
 
-    public function contact(): HasOne
+    public function contact(): BelongsTo
     {
-        return $this->hasOne(Contact::class);
+        return $this->belongsTo(Contact::class);
     }
 
     public function bankDetails(): HasOne
