@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Batch;
 use App\Models\Collector;
 use App\Models\Organization;
+use App\Models\Payment;
 use App\Models\Subscriber;
 use Illuminate\Database\Seeder;
 use Faker\Factory;

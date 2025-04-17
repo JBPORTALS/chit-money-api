@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Batch extends Model
 {
@@ -15,5 +16,10 @@ class Batch extends Model
     public function subscribers(): BelongsToMany
     {
         return $this->belongsToMany(BatchSubscriber::class, "batch_subscriber", "batch_id", "subscriber_id")->withPivot('chit_id');
+    }
+
+    public function payments(): HasManyThrough
+    {
+        return $this->hasManyThrough(Payment::class, BatchSubscriber::class, "batch_subsriber_id", "batch_id");
     }
 }

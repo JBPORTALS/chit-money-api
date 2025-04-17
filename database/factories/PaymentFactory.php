@@ -11,8 +11,14 @@ class PaymentFactory extends Factory
 
     public function definition(): array
     {
-    	return [
-    	    //
-    	];
+        $paymentMode = $this->faker->randomElement(["cash", "online"]);
+
+        return [
+            "penalty" => $this->faker->randomElement([300, 500, 600]),
+            "subscription_amount" => $this->faker->randomElement([5000, 20000, 10000]),
+            "payment_mode" => $paymentMode,
+            "transaction_id" => $paymentMode === "online" ? $this->faker->lexify("??##??####??####?#?#?#?#") : null,
+            "paid_at" => $this->faker->date('Y-m-d') . ' ' . $this->faker->time('H:i:s'),
+        ];
     }
 }

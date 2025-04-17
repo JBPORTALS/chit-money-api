@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignUuid('batch_subscriber_id');
             $table->decimal('penalty', total: 25, places: 2);
             $table->decimal('subscription_amount', total: 25, places: 2);
-            $table->decimal('total_amount', total: 25, places: 2);
+            // $table->decimal('total_amount', total: 25, places: 2); //No need to store, we can calculate it at runtime
             $table->enum('payment_mode', ["cash", "online"]);
             $table->string('transaction_id')->nullable();
             $table->dateTimeTz('paid_at');
