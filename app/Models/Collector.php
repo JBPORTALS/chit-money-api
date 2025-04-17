@@ -5,19 +5,26 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Collector extends Model
 {
     use HasUuids, HasFactory;
     protected $keyType = 'string';
 
-    public function contactDetails()
+    public function organizations(): HasMany
     {
-        return $this->belongsTo(Contact::class, 'contact_id');
+        return $this->hasMany(Organization::class);
     }
 
-    public function bankDetails()
+    public function contact(): BelongsTo
     {
-        return $this->belongsTo(BankDetail::class, 'bank_details_id');
+        return $this->belongsTo(Contact::class);
+    }
+
+    public function bankDetails(): BelongsTo
+    {
+        return $this->belongsTo(BankDetail::class);
     }
 }

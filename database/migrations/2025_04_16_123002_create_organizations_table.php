@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('city');
             $table->string('state');
             $table->string('pincode');
-            $table->string('registration_certificate_url');
+            $table->string('registration_certificate_key');
             $table->timestamps();
 
             $table->primary('id');

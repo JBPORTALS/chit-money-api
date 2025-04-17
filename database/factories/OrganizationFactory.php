@@ -11,8 +11,13 @@ class OrganizationFactory extends Factory
 
     public function definition(): array
     {
-    	return [
-    	    //
-    	];
+        return [
+            'name' => $this->faker->company(),
+            'address' => $this->faker->address(),
+            'city' => $this->faker->city(),
+            'state' => $this->faker->state(),
+            'pincode' => $this->faker->numerify('######'),
+            'registration_certificate_key' => $this->faker->lexify('ut_?????????'),
+        ];
     }
 }

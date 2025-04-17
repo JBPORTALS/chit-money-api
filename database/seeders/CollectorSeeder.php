@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Collector;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class CollectorSeeder extends Seeder
@@ -13,6 +12,6 @@ class CollectorSeeder extends Seeder
      */
     public function run(): void
     {
-        Collector::factory()->count(5)->create();
+        Collector::factory()->count(5)->hasOrganizations(1)->create();
     }
 }
