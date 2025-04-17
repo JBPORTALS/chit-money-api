@@ -15,7 +15,6 @@ return new class extends Migration
         Schema::create('credit_scores', function (Blueprint $table) {
             $table->uuid('id')->default(new Expression('(uuid())'));
             $table->foreignUuid('payment_id');
-            $table->foreignUuid('subscriber_id');
             $table->integer('score');
             $table->timestamps();
 
@@ -23,7 +22,6 @@ return new class extends Migration
 
             //Relations
             $table->foreign('payment_id')->references('id')->on('payments');
-            $table->foreign('subscriber_id')->references('id')->on('subscribers');
         });
     }
 

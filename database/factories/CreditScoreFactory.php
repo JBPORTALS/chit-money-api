@@ -11,8 +11,14 @@ class CreditScoreFactory extends Factory
 
     public function definition(): array
     {
-    	return [
-    	    //
-    	];
+        // Generate a random number between -10 and 10 (excluding 0)
+        $score = 0;
+        while ($score === 0) {
+            $score = $this->faker->numberBetween(-10, 10);
+        }
+
+        return [
+            "score" => $score,
+        ];
     }
 }

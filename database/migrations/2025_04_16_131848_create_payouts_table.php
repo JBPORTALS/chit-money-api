@@ -15,17 +15,17 @@ return new class extends Migration
         Schema::create('payouts', function (Blueprint $table) {
             $table->uuid('id')->default(new Expression('(uuid())'));
             $table->foreignUuid('batch_subscriber_id');
-            $table->decimal('month', total: 25, places: 2);
+            $table->decimal('month', total: 25);
             $table->decimal('amount', total: 25, places: 2);
-            $table->decimal('deductions', total: 25, places: 2);
-            $table->decimal('total_amount', total: 25, places: 2);
+            // $table->decimal('deductions', total: 25, places: 2); Can be calculated based on the applied commision rate
+            $table->decimal('applied_commision_rate', total: 25, places: 2);
+            //$table->decimal('total_amount', total: 25, places: 2); No need. Can be calculate during the runtime
             $table->enum('status', ["requested", "accepted", "rejected", "disbursed", "cancelled"]);
             $table->string('rejection_reason')->nullable();
             $table->dateTimeTz('paid_at')->nullable();
             $table->dateTimeTz('requested_at')->nullable();
             $table->dateTimeTz('accepted_at')->nullable();
             $table->dateTimeTz('rejected_at')->nullable();
-            $table->dateTimeTz('disbursed_at')->nullable();
             $table->dateTimeTz('cancelled_at')->nullable();
             $table->enum('payment_mode', ["cash", "online"]);
             $table->string('transaction_id')->nullable(); //if it's online payment mode
