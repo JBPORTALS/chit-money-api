@@ -16,7 +16,7 @@ class CollectorController extends Controller
         if (!$collector)
             return ResponseHelper::error("Collector not found", "NOT_FOUND", [], 404);
 
-        return ResponseHelper::success($request->attributes->get("session"));
+        return ResponseHelper::success($collector);
     }
 
     public function getOrganizations(Request $request, string $id)

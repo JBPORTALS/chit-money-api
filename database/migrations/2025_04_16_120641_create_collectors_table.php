@@ -5,8 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Query\Expression;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -25,8 +24,8 @@ return new class extends Migration
             $table->primary('id');
 
             //Relations
-            $table->foreign('bank_details_id')->references('id')->on('bank_details');
-            $table->foreign('contact_id')->references('id')->on('contacts');
+            $table->foreign('bank_details_id')->references('id')->cascadeOnDelete()->cascadeOnUpdate()->on('bank_details');
+            $table->foreign('contact_id')->references('id')->cascadeOnDelete()->cascadeOnUpdate()->on("CASCADE")->on('contacts');
         });
     }
 
