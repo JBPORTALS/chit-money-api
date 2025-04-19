@@ -1,6 +1,41 @@
-# Chit.Money API
+# 💳 Chit.Money Collector API — Endpoint Checklist
 
--   [ ] Get colllector profile info
--   [ ] Update collector profile info
--   [ ] Get collector organizations
--   [ ] Get batches managed by collector
+### 🧑‍💼 Collector Profile
+
+-   [ ] `GET    /collectors/profile` — Get collector profile
+-   [ ] `POST   /collectors/profile` — Create collector profile
+-   [ ] `PUT    /collectors/profile` — Update collector profile
+-   [ ] `DELETE /collectors/profile` — Delete collector profile
+
+---
+
+### ☎️ Contact Info
+
+-   [ ] `GET    /collectors/contact` — Get contact information
+-   [ ] `PUT    /collectors/contact` — Update contact information
+
+---
+
+### 🏦 Bank Details
+
+-   [ ] `GET    /collectors/bank-details` — Get bank details
+-   [ ] `PUT    /collectors/bank-details` — Update bank details
+
+---
+
+### 🏢 Organization Management
+
+-   [ ] `GET    /collectors/organization` — Get organization info
+-   [ ] `POST   /collectors/organization` — Create organization
+-   [ ] `PUT    /collectors/organization` — Update organization info
+-   [ ] `DELETE /collectors/organization` — Delete organization
+
+---
+
+### 📦 Batch Management
+
+-   [ ] `GET    /collectors/organization/{orgId}/batches` — Get all batches for organization
+-   [ ] `POST   /collectors/organization/{orgId}/batches` — Create batch in organization
+-   [ ] `GET    /collectors/batches/{batchId}` — Get single batch details
+-   [ ] `PUT    /collectors/batches/{batchId}` — Update batch
+-   [ ] `DELETE /collectors/batches/{batchId}` — Delete batch
