@@ -3,20 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\Collector;
-use Illuminate\Http\Request;
 use App\Helpers\ResponseHelper;
+use App\Traits\HasClerkUser;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class CollectorController extends Controller
 {
+    use HasClerkUser;
     public function getById(Request $request, string $id)
     {
         $collector = Collector::find($id);
 
-        if (!$collector)
-            return ResponseHelper::error("Collector not found", "NOT_FOUND", [], 404);
+        $user = $this->getUser($request);
 
-        return ResponseHelper::success($collector);
+        // if (!$collector)
+        //     return ResponseHelper::error("Collector not found", "NOT_FOUND", [], 404);
+
+        return ResponseHelper::success($user);
     }
 
     public function getOrganizations(Request $request, string $id)
