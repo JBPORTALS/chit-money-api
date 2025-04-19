@@ -44,11 +44,12 @@ class Clerk
             );
 
             $user = $sdk->users->get($sessionClaims->sub);
-            $session = $sdk->sessions->get($sessionClaims->sid);
+
+            if ($user === null)
+                return ResponseHelper::error(401, "USER NOT FOUND", ["message" => "May be user not found"]);
 
             // Attach the session claims to the request
             $request->attributes->set('user', $user->user);
-            $request->attributes->set('session', $session->session);
 
             return $next($request);
 

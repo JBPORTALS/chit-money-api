@@ -18,8 +18,9 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
   //Collector Group
   $router->group(['prefix' => 'collectors', "middleware" => "clerk.auth"], function () use ($router) {
-    $router->get('/{id}', 'CollectorController@getById');
-    $router->put('/{id}', 'CollectorController@update');
-    $router->get('/{id}/organizations', 'CollectorController@getOrganizations');
+    $router->get('/profile', 'CollectorController@get');
+    $router->post('/profile', 'CollectorController@create');
+    $router->put('/profile', 'CollectorController@update');
+    $router->delete('/profile', 'CollectorController@delete');
   });
 });

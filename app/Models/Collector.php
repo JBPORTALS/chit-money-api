@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -11,10 +10,11 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Collector extends Model
 {
-    use HasUuids, HasFactory;
+    use HasFactory;
     protected $keyType = 'string';
 
     protected $fillable = [
+        'id',
         'name',
         'dob',
         'aadhar_back_photo_key',

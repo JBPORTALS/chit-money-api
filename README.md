@@ -2,10 +2,10 @@
 
 ### 🧑‍💼 Collector Profile
 
--   [ ] `GET    /collectors/profile` — Get collector profile
--   [ ] `POST   /collectors/profile` — Create collector profile
--   [ ] `PUT    /collectors/profile` — Update collector profile
--   [ ] `DELETE /collectors/profile` — Delete collector profile
+-   [x] `GET    /collectors/profile` — Get collector profile
+-   [x] `POST   /collectors/profile` — Create collector profile
+-   [x] `PUT    /collectors/profile` — Update collector profile
+-   [x] `DELETE /collectors/profile` — Delete collector profile
 
 ---
 
