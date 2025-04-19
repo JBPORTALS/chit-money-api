@@ -6,39 +6,44 @@ use App\Models\Collector;
 use App\Helpers\ResponseHelper;
 use App\Traits\HasClerkUser;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class CollectorController extends Controller
 {
     use HasClerkUser;
-    public function getById(Request $request, string $id)
+
+    public function get(Request $request)
     {
-        $collector = Collector::find($id);
 
         $user = $this->getUser($request);
 
-        // if (!$collector)
-        //     return ResponseHelper::error("Collector not found", "NOT_FOUND", [], 404);
+        $collector = Collector::findOrFail($user->id);
 
-        return ResponseHelper::success($user);
+        return ResponseHelper::success([...$collector->toArray(), "imageUrl" => $user->imageUrl, "emailAddresses" => $user->emailAddresses]);
     }
 
-    public function getOrganizations(Request $request, string $id)
+    public function create(Request $request)
     {
-        $collector = Collector::find($id)->organizations()->get();
 
-        if (!$collector)
-            return ResponseHelper::error("Collector not found", "NOT_FOUND", [], 404);
+        $schema = [
+            "id" => 'string|required|min:2',
+            "name" => 'string|min:2',
+            "dob" => 'date|min:2',
+            "aadhar_front_photo_key" => 'string|min:3',
+            "aadhar_back_photo_key" => 'string|min:3',
+        ];
 
-        return ResponseHelper::success($collector);
+        //Validate Incoming Request
+        $this->validate($request, $schema);
+
+        $user = $this->getUser($request);
+
+        $collector = Collector::create($request->all())->refresh();
+
+        return ResponseHelper::success($collector, 201);
     }
 
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-
-        $collector = Collector::find($id);
-        if (!$collector)
-            return ResponseHelper::error("Collector not found", "NOT_FOUND", [], 404);
 
         $schema = [
             "name" => "string|min:2",
@@ -47,13 +52,23 @@ class CollectorController extends Controller
             "aadhar_back_photo_key" => "string|min:2",
         ];
 
-        $validator = Validator::make($request->all(), $schema);
+        //validate incoming request
+        $this->validate($request, $schema);
+        $user = $this->getUser($request);
 
-        if ($validator->fails())
-            return ResponseHelper::error("Validation Failed", "VALIDATION_ERROR", $validator->errors(), 422);
+        $collector = Collector::findOrFail($user->id);
+        $collector->updateOrFail($request->all());
 
 
-        $collector->update($request->all());
-        return ResponseHelper::success($collector);
+        return ResponseHelper::success($collector->refresh());
+    }
+    public function delete(Request $request)
+    {
+
+        $user = $this->getUser($request);
+
+        $collector = Collector::findOrFail($user->id)->deleteOrFail();
+
+        return ResponseHelper::success($collector, 204);
     }
 }
