@@ -13,6 +13,13 @@ class Contact extends Model
     use HasUuids, HasFactory;
     protected $keyType = 'string';
 
+    protected $fillable = [
+        "address",
+        "city",
+        "state",
+        "pincode",
+    ];
+
     public function collector(): HasOne
     {
         return $this->hasOne(Collector::class);
