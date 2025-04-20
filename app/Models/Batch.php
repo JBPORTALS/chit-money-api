@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
@@ -12,6 +13,22 @@ class Batch extends Model
 {
     use HasUuids, HasFactory;
     protected $keyType = 'string';
+
+    protected $fillable = [
+        "name",
+        "batch_type",
+        "starts_on",
+        "ends_on",
+        "due_date",
+        "scheme",
+        "fund_amount",
+        "commission_rate"
+    ];
+
+    public function organization(): BelongsTo
+    {
+        return $this->belongsTo(Organization::class);
+    }
 
     public function subscribers(): BelongsToMany
     {
