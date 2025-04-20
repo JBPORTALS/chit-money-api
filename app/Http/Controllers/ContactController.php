@@ -48,8 +48,8 @@ class ContactController extends Controller
             $this->validate($request, $insertSchema);
         }
 
-        $collector->contact()->updateOrCreate(["id" => $collector->contact_id], $request->all());
+        $contact->updateOrCreate(["id" => $collector->contact_id], $request->all());
 
-        return ResponseHelper::success($collector->contact()->first(), $contact->exists() ? 200 : 201);
+        return ResponseHelper::success($contact->first(), $contact->exists() ? 200 : 201);
     }
 }

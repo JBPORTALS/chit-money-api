@@ -30,6 +30,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->put('/contact', 'ContactController@updateForCollector');
 
     //Bank Details Routes
+    $router->get('/bank-details', 'BankDetailController@getForCollector');
+    $router->put('/bank-details', 'BankDetailController@updateForCollector');
 
     //Organization Routes
 

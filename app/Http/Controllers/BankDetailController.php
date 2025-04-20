@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\AccountType;
 use App\Helpers\ResponseHelper;
 use App\Models\Collector;
 use App\Traits\HasClerkUser;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class BankDetailController extends Controller
 {
@@ -22,14 +24,24 @@ class BankDetailController extends Controller
     public function updateForCollector(Request $request)
     {
         $updateSchema = [
-            "address" => "string|min:2",
+            "account_holder_name" => "string|min:2",
+            "account_number" => "string|min:6",
+            "ifsc_code" => "string|min:6",
+            "branch_name" => "string|min:2",
+            "account_type" => ["required", Rule::enum(AccountType::class)],
+            "upi_id" => "string|min:4",
             "city" => "string|min:2",
             "state" => "string|min:2",
             "pincode" => "integer|min:6"
         ];
 
         $insertSchema = [
-            "address" => "string|required|min:2",
+            "account_holder_name" => "string|required|min:2",
+            "account_number" => "string|required|min:6",
+            "ifsc_code" => "string|required|min:6",
+            "branch_name" => "string|required|min:2",
+            "account_type" => ["required", Rule::enum(AccountType::class)],
+            "upi_id" => "string|required|min:4",
             "city" => "string|required|min:2",
             "state" => "string|required|min:2",
             "pincode" => "required|digits:6"
@@ -39,18 +51,16 @@ class BankDetailController extends Controller
 
         $user = $this->getUser($request);
 
-        $collector = Collector::find($user->id);
+        $collector = Collector::findOrFail($user->id);
 
-        $contact = $collector->contact()->updateOrCreate($request->all());
+        $bankDetails = $collector->bankDetails();
 
-        if (!$contact->exists()) {
+        if (!$bankDetails->exists()) {
             $this->validate($request, $insertSchema);
         }
 
-        $collector->contact()->associate($contact);
+        $bankDetails->updateOrCreate(["id" => $collector->bank_details_id], $request->all());
 
-        $collector->save();
-
-        return ResponseHelper::success($collector->contact()->first(), $contact->exists() ? 200 : 201);
+        return ResponseHelper::success($bankDetails->first(), $bankDetails->exists() ? 200 : 201);
     }
 }

@@ -32,8 +32,8 @@ class Collector extends Model
         return $this->belongsTo(Contact::class);
     }
 
-    public function bankDetails(): HasOne
+    public function bankDetails(): BelongsTo
     {
-        return $this->hasOne(BankDetail::class);
+        return $this->BelongsTo(BankDetail::class);
     }
 }
