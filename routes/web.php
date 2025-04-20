@@ -56,7 +56,7 @@ $router->group(['prefix' => 'api', "middleware" => "clerk.auth"], function () us
   });
 
   //Collector Group
-  $router->group(['prefix' => 'collectors'], function () use ($router) {
+  $router->group(['prefix' => 'subscribers'], function () use ($router) {
 
     #Profile Routes
 
