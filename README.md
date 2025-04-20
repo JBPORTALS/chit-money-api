@@ -11,31 +11,29 @@
 
 ### ☎️ Contact Info
 
--   [ ] `GET    /collectors/contact` — Get contact information
--   [ ] `PUT    /collectors/contact` — Update contact information
+-   [x] `GET    /collectors/contact` — Get contact information
+-   [x] `PUT    /collectors/contact` — Update or create contact information
 
 ---
 
 ### 🏦 Bank Details
 
--   [ ] `GET    /collectors/bank-details` — Get bank details
--   [ ] `PUT    /collectors/bank-details` — Update bank details
+-   [x] `GET    /collectors/bank-details` — Get bank details
+-   [x] `PUT    /collectors/bank-details` — Update or create bank details
 
 ---
 
 ### 🏢 Organization Management
 
--   [ ] `GET    /collectors/organization` — Get organization info
--   [ ] `POST   /collectors/organization` — Create organization
--   [ ] `PUT    /collectors/organization` — Update organization info
--   [ ] `DELETE /collectors/organization` — Delete organization
+-   [x] `GET    /collectors/organization` — Get organization info
+-   [x] `PUT    /collectors/organization` — Update or create organization info
 
 ---
 
 ### 📦 Batch Management
 
--   [ ] `GET    /collectors/organization/{orgId}/batches` — Get all batches for organization
--   [ ] `POST   /collectors/organization/{orgId}/batches` — Create batch in organization
--   [ ] `GET    /collectors/batches/{batchId}` — Get single batch details
--   [ ] `PUT    /collectors/batches/{batchId}` — Update batch
--   [ ] `DELETE /collectors/batches/{batchId}` — Delete batch
+-   [x] `GET    /collectors/organization/{orgId}/batches` — Get all batches for organization
+-   [x] `POST   /collectors/organization/{orgId}/batches` — Create batch in organization
+-   [x] `GET    /collectors/batches/{batchId}` — Get single batch details
+-   [x] `PUT    /collectors/batches/{batchId}` — Update batch
+-   [x] `DELETE /collectors/batches/{batchId}` — Delete batch
