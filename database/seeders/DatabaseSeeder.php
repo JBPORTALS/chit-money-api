@@ -2,10 +2,15 @@
 
 namespace Database\Seeders;
 
+use App\Models\BankDetail;
+use App\Models\Collector;
+use App\Models\Contact;
+use App\Models\Subscriber;
 use Clerk\Backend\ClerkBackend;
 use Clerk\Backend\Models\Operations\GetUserListRequest;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -36,8 +41,23 @@ class DatabaseSeeder extends Seeder
     {
 
         //Delete existing users first
-        echo "🧹 Removing Clerk Users \n";
+        echo "🧹 Removing Clerk Users. \n";
         $this->deleteUsers();
+        echo "🧹 Truncate All Data. \n";
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');  // Disable FK checks
+
+        DB::table('collectors')->truncate();
+        DB::table('subscribers')->truncate();
+        DB::table('contacts')->truncate();
+        DB::table('organizations')->truncate();
+        DB::table('batches')->truncate();
+        DB::table('batch_subscriber')->truncate();
+        DB::table('bank_details')->truncate();
+        DB::table('payouts')->truncate();
+        DB::table('payments')->truncate();
+        DB::table('credit_scores')->truncate();
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');  // Enable FK checks again
 
         $this->call(CollectorSeeder::class);
         $this->call(SubscriberSeeder::class);

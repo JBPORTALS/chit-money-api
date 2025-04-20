@@ -12,14 +12,12 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('contacts', function (Blueprint $table) {
-            $table->uuid('id')->default(new Expression('(uuid())'));
+            $table->uuid('id')->primary()->default(new Expression('(uuid())'));
             $table->text('address');
             $table->string('city');
             $table->string('state');
             $table->integer('pincode');
             $table->timestamps();
-
-            $table->primary('id');
         });
     }
 

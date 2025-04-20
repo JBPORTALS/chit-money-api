@@ -12,15 +12,10 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('credit_scores', function (Blueprint $table) {
-            $table->uuid('id')->default(new Expression('(uuid())'));
-            $table->foreignUuid('payment_id');
+            $table->uuid('id')->primary()->default(new Expression('(uuid())'));
+            $table->foreignUuid('payment_id')->references('id')->cascadeOnDelete()->cascadeOnUpdate()->on('payments');
             $table->integer('score');
             $table->timestamps();
-
-            $table->primary('id');
-
-            //Relations
-            $table->foreign('payment_id')->references('id')->cascadeOnDelete()->cascadeOnUpdate()->on('payments');
         });
     }
 

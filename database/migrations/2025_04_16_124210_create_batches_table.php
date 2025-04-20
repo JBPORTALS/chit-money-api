@@ -12,8 +12,8 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('batches', function (Blueprint $table) {
-            $table->uuid('id')->default(new Expression('(uuid())'));
-            $table->foreignUuid('organization_id');
+            $table->uuid('id')->primary()->default(new Expression('(uuid())'));
+            $table->foreignUuid('organization_id')->references('id')->cascadeOnDelete()->cascadeOnUpdate()->on('organizations');
             $table->string('name');
             $table->enum('batch_type', ["auction", "interest"]);
             $table->date('starts_on');
@@ -24,11 +24,6 @@ return new class extends Migration {
             $table->enum('batch_status', ["upcoming", "active", "completed"])->default('upcoming');
             $table->float('commission_rate');
             $table->timestamps();
-
-            $table->primary('id');
-
-            //Relations
-            $table->foreign('organization_id')->references('id')->cascadeOnDelete()->cascadeOnUpdate()->on('organizations');
         });
     }
 

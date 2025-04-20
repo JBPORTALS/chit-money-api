@@ -12,8 +12,8 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('organizations', function (Blueprint $table) {
-            $table->uuid('id')->default(new Expression('(uuid())'));
-            $table->foreignUuid('collector_id');
+            $table->uuid('id')->primary()->default(new Expression('(uuid())'));
+            $table->string('collector_id');
             $table->string('name');
             $table->text('address');
             $table->string('city');
@@ -22,10 +22,8 @@ return new class extends Migration {
             $table->string('registration_certificate_key');
             $table->timestamps();
 
-            $table->primary('id');
-
-            //Relations
             $table->foreign('collector_id')->references('id')->cascadeOnDelete()->cascadeOnUpdate()->on('collectors');
+
         });
     }
 

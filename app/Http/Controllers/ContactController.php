@@ -11,7 +11,7 @@ class ContactController extends Controller
 {
 
     use HasClerkUser;
-    public function getCollectorContact(Request $request)
+    public function getForCollector(Request $request)
     {
         $user = $this->getUser($request);
 
@@ -20,7 +20,7 @@ class ContactController extends Controller
         return ResponseHelper::success($contact, 200);
     }
 
-    public function updateCollectorContact(Request $request)
+    public function updateForCollector(Request $request)
     {
         $updateSchema = [
             "address" => "string|min:2",
@@ -40,17 +40,15 @@ class ContactController extends Controller
 
         $user = $this->getUser($request);
 
-        $collector = Collector::find($user->id);
+        $collector = Collector::findOrFail($user->id);
 
-        $contact = $collector->contact()->updateOrCreate($request->all());
+        $contact = $collector->contact();
 
         if (!$contact->exists()) {
             $this->validate($request, $insertSchema);
         }
 
-        $collector->contact()->associate($contact);
-
-        $collector->save();
+        $collector->contact()->updateOrCreate(["id" => $collector->contact_id], $request->all());
 
         return ResponseHelper::success($collector->contact()->first(), $contact->exists() ? 200 : 201);
     }

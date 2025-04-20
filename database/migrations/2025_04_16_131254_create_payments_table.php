@@ -12,8 +12,8 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('payments', function (Blueprint $table) {
-            $table->uuid('id')->default(new Expression('(uuid())'));
-            $table->foreignUuid('batch_subscriber_id');
+            $table->uuid('id')->primary()->default(new Expression('(uuid())'));
+            $table->foreignUuid('batch_subscriber_id')->references('id')->cascadeOnDelete()->cascadeOnUpdate()->on('batch_subscriber');
             $table->decimal('penalty', total: 25, places: 2);
             $table->decimal('subscription_amount', total: 25, places: 2);
             // $table->decimal('total_amount', total: 25, places: 2); //No need to store, we can calculate it at runtime
@@ -21,11 +21,6 @@ return new class extends Migration {
             $table->string('transaction_id')->nullable();
             $table->dateTimeTz('paid_at');
             $table->timestamps();
-
-            $table->primary('id');
-
-            //Relations
-            $table->foreign('batch_subscriber_id')->references('id')->cascadeOnDelete()->cascadeOnUpdate()->on('batch_subscriber');
         });
     }
 

@@ -12,8 +12,8 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('payouts', function (Blueprint $table) {
-            $table->uuid('id')->default(new Expression('(uuid())'));
-            $table->foreignUuid('batch_subscriber_id');
+            $table->uuid('id')->primary()->default(new Expression('(uuid())'));
+            $table->foreignUuid('batch_subscriber_id')->references('id')->cascadeOnDelete()->cascadeOnUpdate()->on('batch_subscriber');
             $table->decimal('month', total: 25);
             $table->decimal('amount', total: 25, places: 2);
             // $table->decimal('deductions', total: 25, places: 2); Can be calculated based on the applied commision rate
@@ -29,11 +29,6 @@ return new class extends Migration {
             $table->enum('payment_mode', ["cash", "online"]);
             $table->string('transaction_id')->nullable(); //if it's online payment mode
             $table->timestamps();
-
-            $table->primary('id');
-
-            //Relations
-            $table->foreign('batch_subscriber_id')->references('id')->cascadeOnDelete()->cascadeOnUpdate()->on('batch_subscriber');
         });
     }
 

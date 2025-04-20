@@ -12,7 +12,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('bank_details', function (Blueprint $table) {
-            $table->uuid('id')->default(new Expression('(uuid())'));
+            $table->uuid('id')->primary()->default(new Expression('(uuid())'));
             $table->string('account_holder_name');
             $table->text('account_number');
             $table->string('ifsc_code');
@@ -23,8 +23,6 @@ return new class extends Migration {
             $table->string('state');
             $table->string('pincode');
             $table->timestamps();
-
-            $table->primary('id');
         });
     }
 

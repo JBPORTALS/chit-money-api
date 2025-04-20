@@ -12,7 +12,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('subscribers', function (Blueprint $table) {
-            $table->uuid('id')->default(new Expression('(uuid())'));
+            $table->uuid('id')->primary();
             $table->string('display_userId')->nullable();
             $table->string('name')->nullable();
             $table->date('dob')->nullable();
@@ -22,15 +22,9 @@ return new class extends Migration {
             $table->string('nominee_name')->nullable();
             $table->string('nominee_relationship')->nullable();
             $table->string('nominee_phone_number')->nullable();
-            $table->foreignUuid('bank_details_id')->nullable();
-            $table->foreignUuid('contact_id')->nullable();
+            $table->foreignUuid('bank_details_id')->nullable()->references('id')->nullOnDelete()->cascadeOnUpdate()->on('bank_details');
+            $table->foreignUuid('contact_id')->nullable()->references('id')->nullOnDelete()->cascadeOnUpdate()->on('contacts');
             $table->timestamps();
-
-            $table->primary('id');
-
-            //Relations
-            $table->foreign('bank_details_id')->references('id')->cascadeOnDelete()->cascadeOnUpdate()->on('bank_details');
-            $table->foreign('contact_id')->references('id')->cascadeOnDelete()->cascadeOnUpdate()->on('contacts');
         });
     }
 

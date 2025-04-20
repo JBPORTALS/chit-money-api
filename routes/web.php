@@ -26,8 +26,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->delete('/profile', 'CollectorController@delete');
 
     //Contact Routes
-    $router->get('/contact', 'ContactController@getCollectorContact');
-    $router->put('/contact', 'ContactController@updateCollectorContact');
+    $router->get('/contact', 'ContactController@getForCollector');
+    $router->put('/contact', 'ContactController@updateForCollector');
 
     //Bank Details Routes
 
