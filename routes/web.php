@@ -14,34 +14,66 @@
 |
 */
 
-$router->group(['prefix' => 'api'], function () use ($router) {
+$router->group(['prefix' => 'api', "middleware" => "clerk.auth"], function () use ($router) {
 
   //Collector Group
-  $router->group(['prefix' => 'collectors', "middleware" => "clerk.auth"], function () use ($router) {
+  $router->group(['prefix' => 'collectors'], function () use ($router) {
 
-    //Profile Routes
+    #Profile Routes
     $router->get('/profile', 'CollectorController@get');
     $router->post('/profile', 'CollectorController@create');
     $router->put('/profile', 'CollectorController@update');
     $router->delete('/profile', 'CollectorController@delete');
 
-    //Contact Routes
+    #Contact Routes
     $router->get('/contact', 'ContactController@getForCollector');
     $router->put('/contact', 'ContactController@updateForCollector');
 
-    //Bank Details Routes
+    #Bank Details Routes
     $router->get('/bank-details', 'BankDetailController@getForCollector');
     $router->put('/bank-details', 'BankDetailController@updateForCollector');
 
-    //Organization Routes
+    #Organization Routes
     $router->get('/organization', 'OrganizationController@get');
     $router->put('/organization', 'OrganizationController@updateOrCreate');
 
-    //Batch Routes
+    #Batch Routes
     $router->get('/organization/{orgId}/batches', 'BatchController@list');
     $router->post('/organization/{orgId}/batches', 'BatchController@create');
     $router->get('/batches/{batchId}', 'BatchController@getById');
     $router->put('/batches/{batchId}', 'BatchController@update');
     $router->delete('/batches/{batchId}', 'BatchController@delete');
+
+    #Batch Subscribers
+
+    #Payments
+
+    #Payouts
+
+    #Credit Score
+
+    #Analytics
+  });
+
+  //Collector Group
+  $router->group(['prefix' => 'collectors'], function () use ($router) {
+
+    #Profile Routes
+
+    #Contact Routes
+
+    #Bank Details Routes
+
+    #Batch Routes
+
+    #Batch Subscribers
+
+    #Payments
+
+    #Payouts
+
+    #Credit Score
+
+    #Analytics
   });
 });
