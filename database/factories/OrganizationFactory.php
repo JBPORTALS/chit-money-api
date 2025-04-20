@@ -11,7 +11,7 @@ class OrganizationFactory extends Factory
 
     public function definition(): array
     {
-        echo "🏦 Creating Organizatin ....\n";
+        echo "🏦 Creating Organization ....\n";
 
         return [
             'name' => $this->faker->company(),

@@ -44,12 +44,13 @@ class ContactController extends Controller
 
         $contact = $collector->contact();
 
-        if (!$contact->exists()) {
+        if (!$contact) {
             $this->validate($request, $insertSchema);
         }
 
-        $contact->updateOrCreate(["id" => $collector->contact_id], $request->all());
+        //Incase bankdetials doesn't exists for this collector create one
+        $newContact = $collector->contact()->updateOrCreate(["id" => $collector->contact_id], $request->all());
 
-        return ResponseHelper::success($contact->first(), $contact->exists() ? 200 : 201);
+        return ResponseHelper::success($newContact);
     }
 }

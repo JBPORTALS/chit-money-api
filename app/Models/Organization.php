@@ -13,6 +13,16 @@ class Organization extends Model
     use HasUuids, HasFactory;
     protected $keyType = 'string';
 
+    protected $fillable = [
+        "name",
+        "registration_certificate_key",
+        "branch_name",
+        "address",
+        "city",
+        "state",
+        "pincode"
+    ];
+
     public function batches(): HasMany
     {
         return $this->hasMany(Batch::class);

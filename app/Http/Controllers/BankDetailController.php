@@ -58,9 +58,9 @@ class BankDetailController extends Controller
         if (!$bankDetails->exists()) {
             $this->validate($request, $insertSchema);
         }
+        //Incase contact doesn't exists for this collector create one
+        $newBankDetails = $collector->bankDetails()->updateOrCreate(["id" => $collector->bank_details_id], $request->all());
 
-        $bankDetails->updateOrCreate(["id" => $collector->bank_details_id], $request->all());
-
-        return ResponseHelper::success($bankDetails->first(), $bankDetails->exists() ? 200 : 201);
+        return ResponseHelper::success($newBankDetails);
     }
 }

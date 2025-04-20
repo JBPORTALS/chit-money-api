@@ -34,6 +34,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->put('/bank-details', 'BankDetailController@updateForCollector');
 
     //Organization Routes
+    $router->get('/organization', 'OrganizationController@get');
+    $router->put('/organization', 'OrganizationController@updateOrCreate');
 
     //Batch Routes
   });

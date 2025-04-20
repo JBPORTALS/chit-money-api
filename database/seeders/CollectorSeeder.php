@@ -16,9 +16,6 @@ class CollectorSeeder extends Seeder
      */
     public function run(): void
     {
-        $collectors = Collector::factory()->count(5)->create()->all();
-        foreach ($collectors as $collector) {
-            Organization::factory()->state(["collector_id" => $collector->id])->has(Batch::factory()->count(3))->count(1);
-        }
+        Collector::factory()->has(Organization::factory()->has(Batch::factory()->count(3))->count(1))->count(5)->create();
     }
 }
