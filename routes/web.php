@@ -40,5 +40,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     //Batch Routes
     $router->get('/organization/{orgId}/batches', 'BatchController@list');
     $router->post('/organization/{orgId}/batches', 'BatchController@create');
+    $router->get('/batches/{batchId}', 'BatchController@getById');
+    $router->put('/batches/{batchId}', 'BatchController@update');
+    $router->delete('/batches/{batchId}', 'BatchController@delete');
   });
 });

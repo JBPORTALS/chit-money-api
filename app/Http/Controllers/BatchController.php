@@ -30,7 +30,7 @@ class BatchController extends Controller
             "name" => "string|required|min:2",
             "batch_type" => ["required", Rule::enum(BatchType::class)],
             "starts_on" => "date|required",
-            "due_date" => "integer|min:1|max:25",
+            "due_date" => "integer|required|min:1|max:25",
             "scheme" => "integer|required",
             "fund_amount" => "decimal:0|required",
             "commission_rate" => "decimal:0|required"
@@ -49,18 +49,42 @@ class BatchController extends Controller
         return ResponseHelper::success($batches);
     }
 
-    public function getById(Request $request, string $id)
+    public function getById(Request $request, string $batchId)
     {
+        $batch = Batch::findOrFail($batchId);
 
+        return ResponseHelper::success($batch);
     }
 
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $batchId)
     {
+        $schema = [
+            "name" => "string|min:2",
+            "batch_type" => ["required", Rule::enum(BatchType::class)],
+            "starts_on" => "date",
+            "due_date" => "integer|min:1|max:25",
+            "scheme" => "integer",
+            "fund_amount" => "decimal:0",
+            "commission_rate" => "decimal:0"
+        ];
 
+        $validatedBody = $this->validate($request, $schema);
+
+        $batch = Batch::findOrFail($batchId);
+
+        $batch->update($validatedBody);
+
+        $newBatch = $batch->refresh();
+
+        return ResponseHelper::success($newBatch);
     }
 
-    public function delete(Request $request, string $id)
+    public function delete(Request $request, string $batchId)
     {
+        $batch = Batch::findOrFail($batchId);
 
+        $batch->deleteOrFail();
+
+        return ResponseHelper::success($batch);
     }
 }
